@@ -7,7 +7,7 @@ import {
 } from "./calculos/algoritmos.js";
 
 // ---- Grid Dinamico ---- //
-function Grid({ puntos = [], inicio, fin, radio }) {
+function Grid({ puntos = [], inicio, fin, radio, showCenter = false }) {
   // Convertir puntos a Set para búsqueda rápida
   const puntosSet = new Set(
     puntos
@@ -50,7 +50,7 @@ function Grid({ puntos = [], inicio, fin, radio }) {
 
       if (inicio.x === col && inicio.y === row) color = "cell start";
       if (fin.x === col && fin.y === row) color = "cell end";
-      if (col === 0 && row === 0) color = "cell center";
+      if (showCenter && col === 0 && row === 0) color = "cell center";
 
       fila.push(<div key={col} className={color}></div>);
     }
@@ -141,7 +141,7 @@ export default function BresenhamDemo() {
       <p className="bresenham-team-label">Integrantes del equipo</p>
       <ul className="bresenham-team-list">
         <li>Miguel Axel Fuster Barba</li>
-        <li>Leonardo G🏳️‍🌈arcia Miccete</li>
+        <li>Leonardo Garcia Miccete</li>
         <li>Torres Mora Alan Giovanni</li>
       </ul>
       {/* Línea */}
@@ -238,6 +238,7 @@ export default function BresenhamDemo() {
               puntos={animLinea}
               inicio={{ x: lineaInputs.x1, y: lineaInputs.y1 }}
               fin={{ x: lineaInputs.x2, y: lineaInputs.y2 }}
+              showCenter={false}
             />
           </div>
         )}
@@ -326,7 +327,7 @@ export default function BresenhamDemo() {
                 </tbody>
               </table>
             </div>
-            <Grid puntos={animCirc} radio={radio} />
+            <Grid puntos={animCirc} radio={radio} showCenter={true} />
           </div>
         )}
       </AccordionItem>
